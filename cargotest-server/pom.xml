@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -46,6 +48,22 @@
           <groupId>org.codehaus.cargo</groupId>
           <artifactId>cargo-maven3-plugin</artifactId>
           <configuration>
+            <configuration>
+              <properties>
+                <cargo.servlet.port>8080</cargo.servlet.port>
+              </properties>
+            </configuration>
+            <deployables>
+              <deployable>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>${project.artifactId}</artifactId>
+                <type>war</type>
+                <properties>
+                  <context>/</context>
+                </properties>
+                <location>${project.build.directory}/${project.build.finalName}</location>
+              </deployable>
+            </deployables>
           </configuration>
         </plugin>
       </plugins>
@@ -102,6 +120,9 @@
                   <type>embedded</type>
                 </container>
                 <configuration>
+                  <properties>
+                    <GWT_LAUNCHERDIR>${basedir}/../target/gwt/launcherDir/</GWT_LAUNCHERDIR>
+                  </properties>
                   <configfiles>
                     <configfile>
                       <file>${project.basedir}/src/main/tomcatconf/context.xml</file>
@@ -110,24 +131,7 @@
                       <overwrite>true</overwrite>
                     </configfile>
                   </configfiles>
-                  <properties>
-                    <cargo.servlet.port>8080</cargo.servlet.port>
-                    <cargo.tomcat.webappsDirectory>${project.basedir}/src/main/webapp</cargo.tomcat.webappsDirectory>
-                    <cargo.tomcat.copywars>false</cargo.tomcat.copywars>
-                    <GWT_LAUNCHERDIR>${basedir}/../target/gwt/launcherDir/</GWT_LAUNCHERDIR>
-                  </properties>
                 </configuration>
-                <deployables>
-                    <deployable>
-                        <groupId>${project.groupId}</groupId>
-                        <artifactId>${project.artifactId}</artifactId>
-                        <type>war</type>
-                        <properties>
-                          <context>/</context>
-                        </properties>
-                        <location>${project.build.directory}/${project.build.finalName}</location>
-                    </deployable>
-                </deployables>
               </configuration>
             </plugin>
           </plugins>
