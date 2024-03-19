@@ -3,7 +3,7 @@
   <Resources>
     <PreResources
       className="org.apache.catalina.webresources.DirResourceSet"
-      base="${GWT_LAUNCHERDIR}"
+      base="@GWT_LAUNCHERDIR@"
       internalPath="/"
       webAppMount="/"/>
   </Resources>

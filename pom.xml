@@ -9,6 +9,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <cargo.maven.skip>true</cargo.maven.skip>
   </properties>
 
   <dependencyManagement>
@@ -43,13 +44,6 @@
           </devmodeArgs>
         </configuration>
       </plugin>
-      <!-- <plugin>
-        <groupId>org.codehaus.cargo</groupId>
-        <artifactId>cargo-maven3-plugin</artifactId>
-        <configuration>
-          <skip>true</skip>
-        </configuration>
-      </plugin> -->
     </plugins>
     <pluginManagement>
       <plugins>

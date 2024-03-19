@@ -42,6 +42,12 @@
             <contextXml>${basedir}/src/main/jettyconf/context.xml</contextXml>
           </configuration>
         </plugin>
+        <plugin>
+          <groupId>org.codehaus.cargo</groupId>
+          <artifactId>cargo-maven3-plugin</artifactId>
+          <configuration>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>
@@ -90,28 +96,26 @@
               <groupId>org.codehaus.cargo</groupId>
               <artifactId>cargo-maven3-plugin</artifactId>
               <configuration>
+                <skip>false</skip>
                 <container>
                   <containerId>tomcat10x</containerId>
-<!--                  <type>embedded</type>-->
-                  <dependencies>
-                    <dependency>
-                      <location>target/classes</location>
-                    </dependency>
-                  </dependencies>
-                  <systemProperties>
-                    <JAVA_OPTS>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005</JAVA_OPTS>
-                  </systemProperties>
+                  <type>embedded</type>
                 </container>
                 <configuration>
-                  <properties>
-                    <cargo.servlet.port>8080</cargo.servlet.port>
-                  </properties>
                   <configfiles>
                     <configfile>
                       <file>${project.basedir}/src/main/tomcatconf/context.xml</file>
                       <todir>conf</todir>
+                      <configfile>true</configfile>
+                      <overwrite>true</overwrite>
                     </configfile>
                   </configfiles>
+                  <properties>
+                    <cargo.servlet.port>8080</cargo.servlet.port>
+                    <cargo.tomcat.webappsDirectory>${project.basedir}/src/main/webapp</cargo.tomcat.webappsDirectory>
+                    <cargo.tomcat.copywars>false</cargo.tomcat.copywars>
+                    <GWT_LAUNCHERDIR>${basedir}/../target/gwt/launcherDir/</GWT_LAUNCHERDIR>
+                  </properties>
                 </configuration>
                 <deployables>
                     <deployable>
@@ -119,9 +123,9 @@
                         <artifactId>${project.artifactId}</artifactId>
                         <type>war</type>
                         <properties>
-                            <context>/</context>
+                          <context>/</context>
                         </properties>
-<!--                        <location>${project.build.directory}/${project.build.finalName}</location>-->
+                        <location>${project.build.directory}/${project.build.finalName}</location>
                     </deployable>
                 </deployables>
               </configuration>
