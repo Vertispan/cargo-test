@@ -43,6 +43,13 @@
           </devmodeArgs>
         </configuration>
       </plugin>
+      <!-- <plugin>
+        <groupId>org.codehaus.cargo</groupId>
+        <artifactId>cargo-maven3-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin> -->
     </plugins>
     <pluginManagement>
       <plugins>
@@ -73,6 +80,11 @@
           <groupId>org.eclipse.jetty</groupId>
           <artifactId>jetty-maven-plugin</artifactId>
           <version>11.0.19</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.cargo</groupId>
+          <artifactId>cargo-maven3-plugin</artifactId>
+          <version>1.10.12</version>
         </plugin>
         <plugin>
           <groupId>net.ltgt.gwt.maven</groupId>

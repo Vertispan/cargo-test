@@ -86,6 +86,46 @@
                 </webApp>
               </configuration>
             </plugin>
+            <plugin>
+              <groupId>org.codehaus.cargo</groupId>
+              <artifactId>cargo-maven3-plugin</artifactId>
+              <configuration>
+                <container>
+                  <containerId>tomcat10x</containerId>
+<!--                  <type>embedded</type>-->
+                  <dependencies>
+                    <dependency>
+                      <location>target/classes</location>
+                    </dependency>
+                  </dependencies>
+                  <systemProperties>
+                    <JAVA_OPTS>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005</JAVA_OPTS>
+                  </systemProperties>
+                </container>
+                <configuration>
+                  <properties>
+                    <cargo.servlet.port>8080</cargo.servlet.port>
+                  </properties>
+                  <configfiles>
+                    <configfile>
+                      <file>${project.basedir}/src/main/tomcatconf/context.xml</file>
+                      <todir>conf</todir>
+                    </configfile>
+                  </configfiles>
+                </configuration>
+                <deployables>
+                    <deployable>
+                        <groupId>${project.groupId}</groupId>
+                        <artifactId>${project.artifactId}</artifactId>
+                        <type>war</type>
+                        <properties>
+                            <context>/</context>
+                        </properties>
+<!--                        <location>${project.build.directory}/${project.build.finalName}</location>-->
+                    </deployable>
+                </deployables>
+              </configuration>
+            </plugin>
           </plugins>
         </pluginManagement>
       </build>
