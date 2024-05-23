@@ -138,5 +138,19 @@
         </pluginManagement>
       </build>
     </profile>
+    <profile>
+      <id>intellij-local</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <configuration>
+              <containerConfigXML>src/main/tomcatconfintellij/context.xml</containerConfigXML>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
 </project>
